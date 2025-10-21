@@ -1,0 +1,12 @@
+# Configuration spécifique pour l'API Platform
+services:
+    # Configuration des formats API
+
+    # Gestionnaires d'erreurs personnalisés
+    App\EventListener\ApiExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, priority: 50 }
+            
+    App\EventListener\ValidationExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 60 }

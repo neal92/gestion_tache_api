@@ -1,0 +1,15 @@
+# Utilisé pour rediriger toutes les requêtes vers index.php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Déterminer le RewriteBase automatiquement et le définir comme variable d'environnement
+    RewriteCond %{REQUEST_URI}::$0 ^(/.+)/(.*)::\2$
+    RewriteRule .* - [E=BASE:%1]
+    
+    # Si la requête n'est pas pour un fichier ou répertoire existant
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Rediriger vers index.php
+    RewriteRule ^ %{ENV:BASE}/index.php [L]
+</IfModule>

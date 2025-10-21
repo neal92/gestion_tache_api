@@ -1,0 +1,17 @@
+api_platform:
+    title: Gestion de tâches API
+    version: 1.0.0
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']
+    # N'utiliser que le format JSON standard, pas JSON-LD
+    formats:
+        json: ['application/json']
+    exception_to_status:
+        # Les exceptions et leurs codes HTTP correspondants
+        Symfony\Component\Serializer\Exception\ExceptionInterface: 400
+        ApiPlatform\Validator\Exception\ValidationException: 422
+        Doctrine\ORM\OptimisticLockException: 409
+        Symfony\Component\HttpKernel\Exception\NotFoundHttpException: 404
+        Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException: 403
